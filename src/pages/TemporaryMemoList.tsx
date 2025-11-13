@@ -182,7 +182,7 @@ const TemporaryMemoList = () => {
                       onClick={(e) => handleDeleteMemo(memo.id, e)}
                       className="hover:bg-destructive/10 flex-shrink-0"
                     >
-                      <Trash2 className="h-4 w-4 text-destructive" />
+                      <Trash2 className="h-4 w-4 text-[#222]" />
                     </Button>
                   </div>
                 </Card>
