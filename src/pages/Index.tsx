@@ -17,9 +17,9 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center p-6 pb-12">
+    <div className="min-h-screen bg-background flex flex-col place-content-between items-center p-6 pb-12">
       {/* Fixed Header */}
-      <motion.div 
+      <motion.div
         className="w-full max-w-md text-center pt-8"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -28,7 +28,7 @@ const Index = () => {
         <h1 className="text-5xl font-bold text-primary mb-2">SynkTank</h1>
         <AnimatePresence mode="wait">
           {showMemoPage && (
-            <motion.p 
+            <motion.p
               key="memo-subtitle"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -86,9 +86,7 @@ const Index = () => {
               </div>
 
               {/* Swipe indicator */}
-              <div className="text-muted-foreground text-sm absolute bottom-8">
-                위로 스와이프하여 메모 페이지로
-              </div>
+              <div className="text-muted-foreground text-sm absolute bottom-8">위로 스와이프하여 메모 페이지로</div>
             </motion.div>
           ) : (
             <motion.div
@@ -127,9 +125,7 @@ const Index = () => {
               </div>
 
               {/* Swipe indicator */}
-              <div className="text-muted-foreground text-sm">
-                아래로 스와이프하여 돌아가기
-              </div>
+              <div className="text-muted-foreground text-sm">아래로 스와이프하여 돌아가기</div>
             </motion.div>
           )}
         </AnimatePresence>
