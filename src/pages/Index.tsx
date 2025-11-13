@@ -20,22 +20,26 @@ const Index = () => {
     <div className="min-h-screen bg-background flex flex-col items-center p-6 pb-12">
       {/* Fixed Header */}
       <motion.div 
-        className="w-full max-w-md text-center pt-8 mb-8"
+        className="w-full max-w-md text-center pt-8"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
         <h1 className="text-5xl font-bold text-primary mb-2">SynkTank</h1>
-        <motion.p 
-          key={showMemoPage ? "memo" : "main"}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="text-muted-foreground"
-        >
-          {showMemoPage ? "Choose your memo type" : "Fill the tank with your actions"}
-        </motion.p>
+        <AnimatePresence mode="wait">
+          {showMemoPage && (
+            <motion.p 
+              key="memo-subtitle"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="text-muted-foreground"
+            >
+              Choose your memo type
+            </motion.p>
+          )}
+        </AnimatePresence>
       </motion.div>
 
       {/* Content Area */}
@@ -44,7 +48,7 @@ const Index = () => {
           {!showMemoPage ? (
             <motion.div
               key="main-content"
-              className="w-full flex flex-col items-center justify-between flex-1"
+              className="w-full flex flex-col items-center justify-center flex-1"
               drag="y"
               dragConstraints={{ top: 0, bottom: 0 }}
               dragElastic={0.2}
@@ -57,9 +61,8 @@ const Index = () => {
               exit={{ opacity: 0, y: -50 }}
               transition={{ duration: 0.3 }}
             >
-
-              {/* Action Buttons */}
-              <div className="flex gap-6 w-full max-w-md justify-center mt-8">
+              {/* Action Buttons - Center */}
+              <div className="flex gap-6 w-full max-w-md justify-center mb-12">
                 <Button
                   onClick={handleAdd}
                   size="lg"
@@ -77,13 +80,13 @@ const Index = () => {
                 </Button>
               </div>
 
-              {/* Gauge */}
-              <div className="w-full flex-1 flex items-center justify-center">
+              {/* Small Gauge */}
+              <div className="scale-50 -mt-8 mb-8">
                 <CylindricalGauge percentage={percentage} />
               </div>
 
               {/* Swipe indicator */}
-              <div className="text-muted-foreground text-sm">
+              <div className="text-muted-foreground text-sm mt-auto">
                 위로 스와이프하여 메모 페이지로
               </div>
             </motion.div>
