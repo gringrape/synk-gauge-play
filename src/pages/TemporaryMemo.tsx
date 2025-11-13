@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { supabase } from "@/lib/supabaseClient";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,6 +9,8 @@ import { toast } from "sonner";
 const TemporaryMemo = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
+  const fromAdd = (location.state as any)?.fromAdd;
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const debounceTimer = useRef<NodeJS.Timeout | null>(null);
@@ -125,13 +127,15 @@ const TemporaryMemo = () => {
             </Button>
             <h1 className="text-2xl font-bold text-[#222]">임시 메모</h1>
           </div>
-          <Button
-            onClick={handleMoveToPermanent}
-            className="bg-gradient-to-br from-secondary to-secondary/80 hover:from-secondary/90 hover:to-secondary/70 text-primary-foreground"
-          >
-            <MoveRight className="h-4 w-4 mr-2" />
-            영구메모로 이동
-          </Button>
+{!fromAdd && (
+  <Button
+    onClick={handleMoveToPermanent}
+    className="bg-gradient-to-br from-secondary to-secondary/80 hover:from-secondary/90 hover:to-secondary/70 text-primary-foreground"
+  >
+    <MoveRight className="h-4 w-4 mr-2" />
+    영구메모로 이동
+  </Button>
+)}
         </div>
 
         <Textarea

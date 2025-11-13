@@ -24,7 +24,7 @@ const Index = () => {
       if (error) throw error;
 
       if (data) {
-        navigate(`/memo/${data.id}`);
+        navigate(`/memo/${data.id}`, { state: { fromAdd: true } });
       }
     } catch (error) {
       console.error("Error creating memo:", error);
