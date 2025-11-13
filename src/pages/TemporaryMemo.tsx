@@ -95,17 +95,17 @@ const TemporaryMemo = () => {
           >
             <ArrowLeft className="h-5 w-5" />
           </Button>
-          <h1 className="text-2xl font-bold text-foreground">임시 메모</h1>
+          <h1 className="text-2xl font-bold text-[#222]">임시 메모</h1>
         </div>
 
         <Textarea
           value={content}
           onChange={(e) => handleContentChange(e.target.value)}
           placeholder="메모를 입력하세요..."
-          className="min-h-[500px] bg-background/50 border-border/50 focus:border-primary resize-none text-foreground"
+          className="min-h-[500px] bg-background/50 border-border/50 focus:border-primary resize-none text-[#222]"
         />
 
-        <p className="text-sm text-muted-foreground mt-2">
+        <p className="text-sm text-[#222] mt-2">
           자동으로 저장됩니다
         </p>
       </div>
