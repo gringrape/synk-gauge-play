@@ -32,8 +32,29 @@ const Index = () => {
     }
   };
 
-  const handleMultiply = () => {
-    setPercentage((prev) => Math.min(100, prev * 1.5));
+  const handleMultiply = async () => {
+    // Get random temporary memo
+    try {
+      const { data, error } = await supabase
+        .from("temporary_memos")
+        .select("*");
+
+      if (error) throw error;
+
+      if (!data || data.length === 0) {
+        toast.error("임시메모가 없습니다");
+        return;
+      }
+
+      // Select random memo
+      const randomIndex = Math.floor(Math.random() * data.length);
+      const randomMemo = data[randomIndex];
+
+      navigate(`/memo/${randomMemo.id}`);
+    } catch (error) {
+      console.error("Error loading random memo:", error);
+      toast.error("메모를 불러오는데 실패했습니다");
+    }
   };
 
   return (
