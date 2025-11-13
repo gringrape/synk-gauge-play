@@ -48,7 +48,7 @@ const Index = () => {
           {!showMemoPage ? (
             <motion.div
               key="main-content"
-              className="w-full flex flex-col items-center justify-center flex-1"
+              className="w-full flex flex-col items-center justify-center flex-1 gap-8"
               drag="y"
               dragConstraints={{ top: 0, bottom: 0 }}
               dragElastic={0.2}
@@ -62,7 +62,7 @@ const Index = () => {
               transition={{ duration: 0.3 }}
             >
               {/* Action Buttons - Center */}
-              <div className="flex gap-6 w-full max-w-md justify-center mb-12">
+              <div className="flex gap-6 w-full max-w-md justify-center">
                 <Button
                   onClick={handleAdd}
                   size="lg"
@@ -81,12 +81,12 @@ const Index = () => {
               </div>
 
               {/* Small Gauge */}
-              <div className="scale-50 -mt-8 mb-8">
+              <div className="scale-[0.6]">
                 <CylindricalGauge percentage={percentage} />
               </div>
 
               {/* Swipe indicator */}
-              <div className="text-muted-foreground text-sm mt-auto">
+              <div className="text-muted-foreground text-sm absolute bottom-8">
                 위로 스와이프하여 메모 페이지로
               </div>
             </motion.div>

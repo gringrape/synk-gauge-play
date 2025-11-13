@@ -6,6 +6,7 @@ interface CylindricalGaugeProps {
 
 const CylindricalGauge = ({ percentage }: CylindricalGaugeProps) => {
   const clampedPercentage = Math.max(0, Math.min(100, percentage));
+  const isFull = clampedPercentage >= 100;
 
   return (
     <div className="flex flex-col items-center justify-center w-full max-w-xs mx-auto">
@@ -32,6 +33,43 @@ const CylindricalGauge = ({ percentage }: CylindricalGaugeProps) => {
             >
               {/* Shine effect on fill */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+              
+              {/* Wave effect when full */}
+              {isFull && (
+                <>
+                  <motion.div
+                    className="absolute top-0 left-0 right-0 h-4 bg-primary/60"
+                    style={{
+                      borderRadius: '50%',
+                    }}
+                    animate={{
+                      y: [-2, 2, -2],
+                      scaleX: [1, 1.05, 1],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+                  <motion.div
+                    className="absolute top-0 left-0 right-0 h-4 bg-primary/40"
+                    style={{
+                      borderRadius: '50%',
+                    }}
+                    animate={{
+                      y: [2, -2, 2],
+                      scaleX: [1.05, 1, 1.05],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 0.5,
+                    }}
+                  />
+                </>
+              )}
             </motion.div>
           </div>
           
