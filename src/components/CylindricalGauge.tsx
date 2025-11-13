@@ -14,7 +14,7 @@ const CylindricalGauge = ({ percentage }: CylindricalGaugeProps) => {
         {/* Cylinder container */}
         <div className="relative w-full h-full">
           {/* Top ellipse */}
-          <div className="absolute top-0 left-0 right-0 h-12 rounded-[50%] bg-muted border-2 border-border" 
+          <div className="absolute top-0 left-0 right-0 h-12 rounded-[50%] bg-[#] border-2 border-border" 
                style={{ transform: 'rotateX(60deg)' }} />
           
           {/* Cylinder body - background */}

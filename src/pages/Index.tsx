@@ -17,7 +17,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col place-content-between items-center p-6 pb-12">
+    <div className="min-h-screen bg-background flex flex-col items-center p-6 pb-12">
       {/* Fixed Header */}
       <motion.div
         className="w-full max-w-md text-center pt-8"
@@ -25,7 +25,7 @@ const Index = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="text-5xl font-bold text-primary mb-2">SynkTank</h1>
+        <h1 className="text-5xl font-bold mb-2 text-[#222]">SynkTank</h1>
         <AnimatePresence mode="wait">
           {showMemoPage && (
             <motion.p
@@ -36,19 +36,30 @@ const Index = () => {
               transition={{ duration: 0.3 }}
               className="text-muted-foreground"
             >
-              Choose your memo type
+              With your team
+            </motion.p>
+          ) || (
+            <motion.p
+              key="memo-subtitle"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="text-muted-foreground"
+            >
+              Sync your brain
             </motion.p>
           )}
         </AnimatePresence>
       </motion.div>
 
       {/* Content Area */}
-      <div className="flex-1 w-full flex flex-col items-center justify-between">
+      <div className="flex-1 w-full flex flex-col items-center">
         <AnimatePresence mode="wait">
           {!showMemoPage ? (
             <motion.div
               key="main-content"
-              className="w-full flex flex-col items-center justify-center flex-1 gap-8"
+              className="w-full h-auto flex flex-col items-center justify-center flex-1 gap-8"
               drag="y"
               dragConstraints={{ top: 0, bottom: 0 }}
               dragElastic={0.2}
@@ -62,31 +73,25 @@ const Index = () => {
               transition={{ duration: 0.3 }}
             >
               {/* Action Buttons - Center */}
-              <div className="flex gap-6 w-full max-w-md justify-center">
-                <Button
-                  onClick={handleAdd}
-                  size="lg"
-                  className="flex-1 h-32 rounded-2xl bg-gradient-to-br from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground shadow-lg hover:shadow-[var(--shadow-glow)] transition-all duration-300 text-4xl font-bold"
-                >
-                  <Plus className="w-16 h-16" />
-                </Button>
+              <div className="translate-y-[-2em] flex gap-6 w-full max-w-md justify-center">
 
                 <Button
                   onClick={handleMultiply}
                   size="lg"
                   className="flex-1 h-32 rounded-2xl bg-gradient-to-br from-secondary to-secondary/80 hover:from-secondary/90 hover:to-secondary/70 text-secondary-foreground shadow-lg hover:shadow-[0_0_20px_hsl(30_100%_60%/0.4)] transition-all duration-300 text-4xl font-bold"
                 >
-                  <X className="w-16 h-16" />
+                  x
+                </Button>
+
+                <Button
+                  onClick={handleAdd}
+                  size="lg"
+                  className="flex-1 h-32 rounded-2xl bg-gradient-to-br from-accent to-accent/80 text-primary-foreground shadow-lg transition-all duration-300 text-4xl font-bold"
+                >
+                  +
                 </Button>
               </div>
 
-              {/* Small Gauge */}
-              <div className="scale-[0.6]">
-                <CylindricalGauge percentage={percentage} />
-              </div>
-
-              {/* Swipe indicator */}
-              <div className="text-muted-foreground text-sm absolute bottom-8">위로 스와이프하여 메모 페이지로</div>
             </motion.div>
           ) : (
             <motion.div
@@ -111,21 +116,16 @@ const Index = () => {
                   size="lg"
                   className="h-32 rounded-2xl bg-gradient-to-br from-accent to-accent/80 hover:from-accent/90 hover:to-accent/70 text-accent-foreground shadow-lg hover:shadow-[0_0_20px_hsl(140_75%_50%/0.4)] transition-all duration-300 text-2xl font-bold flex items-center justify-center gap-4"
                 >
-                  <FileText className="w-10 h-10" />
-                  임시메모
+                  Temporary
                 </Button>
 
                 <Button
                   size="lg"
-                  className="h-32 rounded-2xl bg-gradient-to-br from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground shadow-lg hover:shadow-[var(--shadow-glow)] transition-all duration-300 text-2xl font-bold flex items-center justify-center gap-4"
+                  className="h-32 rounded-2xl bg-gradient-to-br from-secondary to-secondary/80 hover:from-secondary/90 hover:to-secondary/70 text-primary-foreground shadow-lg hover:shadow-[var(--shadow-glow)] transition-all duration-300 text-2xl font-bold flex items-center justify-center gap-4"
                 >
-                  <Save className="w-10 h-10" />
-                  영구메모
+                  Permanant
                 </Button>
               </div>
-
-              {/* Swipe indicator */}
-              <div className="text-muted-foreground text-sm">아래로 스와이프하여 돌아가기</div>
             </motion.div>
           )}
         </AnimatePresence>
