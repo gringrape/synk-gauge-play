@@ -7,6 +7,8 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import TemporaryMemo from "./pages/TemporaryMemo";
 import TemporaryMemoList from "./pages/TemporaryMemoList";
+import PermanentMemo from "./pages/PermanentMemo";
+import PermanentMemoList from "./pages/PermanentMemoList";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +22,8 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/memos" element={<TemporaryMemoList />} />
           <Route path="/memo/:id" element={<TemporaryMemo />} />
+          <Route path="/permanent-memos" element={<PermanentMemoList />} />
+          <Route path="/permanent-memo/:id" element={<PermanentMemo />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

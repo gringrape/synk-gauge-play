@@ -162,10 +162,11 @@ const Index = () => {
                 </Button>
 
                 <Button
+                  onClick={() => navigate("/permanent-memos")}
                   size="lg"
                   className="h-32 rounded-2xl bg-gradient-to-br from-secondary to-secondary/80 hover:from-secondary/90 hover:to-secondary/70 text-primary-foreground shadow-lg hover:shadow-[var(--shadow-glow)] transition-all duration-300 text-2xl font-bold flex items-center justify-center gap-4"
                 >
-                  Permanant
+                  Permanent
                 </Button>
               </div>
             </motion.div>
