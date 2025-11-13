@@ -133,6 +133,7 @@ const Index = () => {
               {/* Memo Buttons */}
               <div className="flex flex-col gap-6 w-full max-w-md justify-center flex-1">
                 <Button
+                  onClick={() => navigate("/memos")}
                   size="lg"
                   className="h-32 rounded-2xl bg-gradient-to-br from-accent to-accent/80 hover:from-accent/90 hover:to-accent/70 text-accent-foreground shadow-lg hover:shadow-[0_0_20px_hsl(140_75%_50%/0.4)] transition-all duration-300 text-2xl font-bold flex items-center justify-center gap-4"
                 >
