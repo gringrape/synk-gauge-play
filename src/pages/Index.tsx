@@ -1,15 +1,35 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Plus, X, FileText, Save } from "lucide-react";
 import CylindricalGauge from "@/components/CylindricalGauge";
 import { motion, AnimatePresence } from "framer-motion";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const Index = () => {
+  const navigate = useNavigate();
   const [percentage, setPercentage] = useState(0);
   const [showMemoPage, setShowMemoPage] = useState(false);
 
-  const handleAdd = () => {
-    setPercentage((prev) => Math.min(100, prev + 10));
+  const handleAdd = async () => {
+    // Create new temporary memo and navigate to it
+    try {
+      const { data, error } = await supabase
+        .from("temporary_memos")
+        .insert({ content: "" })
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      if (data) {
+        navigate(`/memo/${data.id}`);
+      }
+    } catch (error) {
+      console.error("Error creating memo:", error);
+      toast.error("메모 생성에 실패했습니다");
+    }
   };
 
   const handleMultiply = () => {
