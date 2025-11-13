@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/lib/supabaseClient";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowLeft, Plus } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 
@@ -38,25 +38,6 @@ const PermanentMemoList = () => {
       toast.error("메모 목록을 불러오는데 실패했습니다");
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const handleCreateNew = async () => {
-    try {
-      const { data, error } = await supabase
-        .from("permanent_memos")
-        .insert({ content: "" })
-        .select()
-        .single();
-
-      if (error) throw error;
-
-      if (data) {
-        navigate(`/permanent-memo/${data.id}`);
-      }
-    } catch (error) {
-      console.error("Error creating memo:", error);
-      toast.error("메모 생성에 실패했습니다");
     }
   };
 
@@ -116,24 +97,12 @@ const PermanentMemoList = () => {
             </Button>
             <h1 className="text-2xl font-bold text-[#222]">영구 메모</h1>
           </div>
-          <Button
-            onClick={handleCreateNew}
-            className="bg-gradient-to-br from-secondary to-secondary/80 hover:from-secondary/90 hover:to-secondary/70 text-primary-foreground"
-          >
-            <Plus className="h-5 w-5 mr-2" />
-            새 메모
-          </Button>
         </div>
 
         {memos.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-[#222] mb-4">메모가 없습니다</p>
-            <Button
-              onClick={handleCreateNew}
-              className="bg-gradient-to-br from-secondary to-secondary/80 hover:from-secondary/90 hover:to-secondary/70 text-primary-foreground"
-            >
-              첫 메모 만들기
-            </Button>
+            <p className="text-[#222]">영구메모가 없습니다</p>
+            <p className="text-sm text-[#222]/60 mt-2">임시메모를 영구메모로 이동하여 생성하세요</p>
           </div>
         ) : (
           <div className="space-y-4">
