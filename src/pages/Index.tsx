@@ -2,10 +2,12 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Plus, X } from "lucide-react";
 import CylindricalGauge from "@/components/CylindricalGauge";
-import { motion } from "framer-motion";
+import MemoPage from "@/components/MemoPage";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Index = () => {
   const [percentage, setPercentage] = useState(0);
+  const [showMemoPage, setShowMemoPage] = useState(false);
 
   const handleAdd = () => {
     setPercentage((prev) => Math.min(100, prev + 10));
@@ -16,7 +18,22 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-between p-6 pb-12">
+    <AnimatePresence mode="wait">
+      {!showMemoPage ? (
+        <motion.div
+          key="main"
+          className="min-h-screen bg-background flex flex-col items-center justify-between p-6 pb-12"
+          drag="y"
+          dragConstraints={{ top: 0, bottom: 0 }}
+          dragElastic={0.2}
+          onDragEnd={(_, info) => {
+            if (info.offset.y < -100) {
+              setShowMemoPage(true);
+            }
+          }}
+          exit={{ y: "-100%" }}
+          transition={{ type: "spring", damping: 25, stiffness: 300 }}
+        >
       {/* Header */}
       <motion.div 
         className="w-full max-w-md text-center pt-8"
@@ -61,7 +78,16 @@ const Index = () => {
       >
         <CylindricalGauge percentage={percentage} />
       </motion.div>
-    </div>
+
+      {/* Swipe indicator */}
+      <div className="text-muted-foreground text-sm mt-4">
+        위로 스와이프하여 메모 페이지로
+      </div>
+    </motion.div>
+      ) : (
+        <MemoPage key="memo" onSwipeDown={() => setShowMemoPage(false)} />
+      )}
+    </AnimatePresence>
   );
 };
 
