@@ -75,7 +75,7 @@ const Index = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="text-muted-foreground"
+              className="text-[#222]"
             >
               With your team
             </motion.p>
@@ -86,7 +86,7 @@ const Index = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="text-muted-foreground"
+              className="text-[#222]"
             >
               Sync your brain
             </motion.p>

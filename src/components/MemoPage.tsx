@@ -26,7 +26,7 @@ const MemoPage = ({ onSwipeDown }: MemoPageProps) => {
       {/* Header */}
       <div className="w-full max-w-md text-center pt-8">
         <h1 className="text-5xl font-bold text-primary mb-2">SynkTank</h1>
-        <p className="text-muted-foreground">Choose your memo type</p>
+        <p className="text-[#222]">Choose your memo type</p>
       </div>
 
       {/* Memo Buttons */}
@@ -49,7 +49,7 @@ const MemoPage = ({ onSwipeDown }: MemoPageProps) => {
       </div>
 
       {/* Swipe indicator */}
-      <div className="text-muted-foreground text-sm">
+      <div className="text-[#222] text-sm">
         아래로 스와이프하여 돌아가기
       </div>
     </motion.div>
