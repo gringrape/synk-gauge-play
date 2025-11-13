@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { supabase } from "@/lib/supabaseClient";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, MoveRight } from "lucide-react";
 import { toast } from "sonner";
 
 const TemporaryMemo = () => {
@@ -75,6 +75,33 @@ const TemporaryMemo = () => {
     navigate("/");
   };
 
+  const handleMoveToPermanent = async () => {
+    if (!id) return;
+
+    try {
+      // Create permanent memo with current content
+      const { error: insertError } = await supabase
+        .from("permanent_memos")
+        .insert({ content });
+
+      if (insertError) throw insertError;
+
+      // Delete temporary memo
+      const { error: deleteError } = await supabase
+        .from("temporary_memos")
+        .delete()
+        .eq("id", id);
+
+      if (deleteError) throw deleteError;
+
+      toast.success("영구메모로 이동했습니다");
+      navigate("/");
+    } catch (error) {
+      console.error("Error moving to permanent:", error);
+      toast.error("영구메모로 이동하는데 실패했습니다");
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20 flex items-center justify-center">
@@ -86,16 +113,25 @@ const TemporaryMemo = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20">
       <div className="container max-w-2xl mx-auto px-4 py-6">
-        <div className="flex items-center gap-4 mb-6">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleBack}
+              className="hover:bg-primary/10"
+            >
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
+            <h1 className="text-2xl font-bold text-[#222]">임시 메모</h1>
+          </div>
           <Button
-            variant="ghost"
-            size="icon"
-            onClick={handleBack}
-            className="hover:bg-primary/10"
+            onClick={handleMoveToPermanent}
+            className="bg-gradient-to-br from-secondary to-secondary/80 hover:from-secondary/90 hover:to-secondary/70 text-primary-foreground"
           >
-            <ArrowLeft className="h-5 w-5" />
+            <MoveRight className="h-4 w-4 mr-2" />
+            영구메모로 이동
           </Button>
-          <h1 className="text-2xl font-bold text-[#222]">임시 메모</h1>
         </div>
 
         <Textarea
