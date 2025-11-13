@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Plus, X, FileText, Save } from "lucide-react";
 import CylindricalGauge from "@/components/CylindricalGauge";
 import { motion, AnimatePresence } from "framer-motion";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/supabaseClient";
 import { toast } from "sonner";
 
 const Index = () => {
