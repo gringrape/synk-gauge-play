@@ -42,7 +42,7 @@ const Index = () => {
       if (error) throw error;
 
       if (!data || data.length === 0) {
-        toast.error("임시메모가 없습니다");
+        toast.error("임시메모가 없습니다. + 버튼을 눌러 메모를 먼저 작성해주세요.");
         return;
       }
 
