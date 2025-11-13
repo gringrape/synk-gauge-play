@@ -107,7 +107,7 @@ const TemporaryMemo = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-background to-secondary/20 flex items-center justify-center">
-        <p className="text-foreground/60">로딩중...</p>
+        <p className="text-[#222]">로딩중...</p>
       </div>
     );
   }
@@ -123,7 +123,7 @@ const TemporaryMemo = () => {
               onClick={handleBack}
               className="hover:bg-primary/10"
             >
-              <ArrowLeft className="h-5 w-5" />
+              <ArrowLeft className="h-5 w-5 text-[#222]" />
             </Button>
             <h1 className="text-2xl font-bold text-[#222]">임시 메모</h1>
           </div>
